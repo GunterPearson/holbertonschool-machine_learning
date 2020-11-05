@@ -5,6 +5,8 @@
 def matrix_shape(matrix):
     """ reurn matrix shape"""
     result = []
+    if matrix == []:
+        return result
     i = 0
     z = 0
     result.append(len(matrix))
