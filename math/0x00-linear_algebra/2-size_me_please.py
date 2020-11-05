@@ -3,20 +3,12 @@
 
 
 def matrix_shape(matrix):
-    """ reurn matrix shape"""
-    result = []
-    if matrix == []:
-        return result
-    i = 0
-    z = 0
-    result.append(len(matrix))
-    for list in matrix:
-        for width in list:
-            i += 1
-            if type(width) == type(list):
-                z = len(width)
-    i /= 2
-    result.append(int(i))
-    if z is not 0:
-        result.append(z)
-    return result
+    """Return shape of given list-matrix"""
+    shape = []
+    try:
+        while(len(matrix) > 0):
+            shape.append(len(matrix))
+            matrix = matrix[0]
+    except TypeError:
+        pass
+    return shape
