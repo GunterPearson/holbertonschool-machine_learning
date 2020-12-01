@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ ridin bareback"""
 
+
 def mat_mul(mat1, mat2):
     """ multiply two matrix"""
     if len(mat1[0]) == len(mat2):
