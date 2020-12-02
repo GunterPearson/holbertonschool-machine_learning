@@ -7,5 +7,5 @@ def np_slice(matrix, axes={}):
     form = (max(axes) + 1) * [slice(None)]
     for k, v in axes.items():
         form[k] = slice(*v)
-    result = matrix[form]
+    result = matrix[tuple(form)]
     return result
