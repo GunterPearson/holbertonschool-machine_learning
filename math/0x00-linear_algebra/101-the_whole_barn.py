@@ -4,11 +4,15 @@
 
 def add_matrices(mat1, mat2):
     """ add two matrices"""
-    import numpy as np
-    m1 = np.array(mat1)
-    m2 = np.array(mat2)
     try:
-        result = m1 + m2
-    except ValueError:
-        return None
-    return result.tolist()
+        if len(mat1) != len(mat2):
+            return None
+        result = []
+        for x, y in zip(mat1, mat2):
+            temp = add_matrices(x, y)
+            if temp is None:
+                return None
+            result.append(temp)
+        return result
+    except TypeError:
+        return mat1 + mat2
