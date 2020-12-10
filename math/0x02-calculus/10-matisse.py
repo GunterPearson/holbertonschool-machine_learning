@@ -4,7 +4,7 @@
 
 def poly_derivative(poly):
     """ find derivative"""
-    if type(poly) != list:
+    if type(poly) != list or len(poly) == 0:
         return None
     if len(poly) == 1:
         return [0]
