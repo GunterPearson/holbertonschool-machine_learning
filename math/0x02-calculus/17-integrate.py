@@ -6,9 +6,10 @@ def poly_integral(poly, C=0):
     """ integral math"""
     if type(poly) != list or len(poly) == 0:
         return None
-    if len(poly) == 1:
-        return [0]
-    poly.insert(0, 0)
-    for x in range(1, len(poly)):
-        poly[x] = poly[x] / x
-    return poly
+    if type(C) != int or C < 0:
+        return None
+    new = poly.copy()
+    new.insert(0, 0)
+    for x in range(1, len(new)):
+        new[x] = new[x] / x
+    return new
