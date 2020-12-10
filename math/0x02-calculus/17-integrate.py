@@ -6,6 +6,8 @@ def poly_integral(poly, C=0):
     """ integral math"""
     if type(poly) != list or len(poly) < 1:
         return None
+    if type(C) != int and type(C) != float:
+        return None
     if poly == [0]:
         return [C]
     result = all(type(s) in [int, float] for s in poly)
