@@ -20,11 +20,16 @@ class Poisson:
 
     def pmf(self, k):
         """ calculate the pmf"""
-        import math
         if type(k) != int:
             k = int(k)
         if k <= 0:
             return 0
         e = 2.7182818285
         return (pow(e, self.lambtha * -1) * pow(self.lambtha, k)
-                / math.factorial(k))
+                / factorial(k))
+
+def factorial(k):
+    """ return factorial"""
+    if k == 1:
+        return 1
+    return k * factorial(k - 1)
