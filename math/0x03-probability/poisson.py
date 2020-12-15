@@ -22,15 +22,28 @@ class Poisson:
         """ calculate the pmf"""
         if type(k) != int:
             k = int(k)
-        if k <= 0:
+        if k < 0:
             return 0
         e = 2.7182818285
         return (pow(e, self.lambtha * -1) * pow(self.lambtha, k)
                 / factorial(k))
 
+    def cdf(self, k):
+        """ calculate cdf"""
+        if type(k) != int:
+            k = int(k)
+        if k < 0:
+            return 0
+        e = 2.7182818285
+        return sum([self.pmf(x) for x in range(k + 1)])
+
 
 def factorial(k):
     """ return factorial"""
+    if k < 0:
+        return None
+    if k == 0:
+        return 1
     if k == 1:
         return 1
     return k * factorial(k - 1)
