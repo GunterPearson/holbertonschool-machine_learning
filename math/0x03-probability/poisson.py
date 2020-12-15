@@ -28,6 +28,7 @@ class Poisson:
         return (pow(e, self.lambtha * -1) * pow(self.lambtha, k)
                 / factorial(k))
 
+
 def factorial(k):
     """ return factorial"""
     if k == 1:
