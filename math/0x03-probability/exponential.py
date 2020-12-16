@@ -17,3 +17,10 @@ class Exponential:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.lambtha = len(data) / sum(data)
+
+    def pdf(self, x):
+        """ find the probability distributions """
+        e = 2.7182818285
+        if x <= 0:
+            return 0
+        return self.lambtha * pow(e, -(self.lambtha * x))
