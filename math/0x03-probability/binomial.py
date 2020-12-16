@@ -34,6 +34,13 @@ class Binomial:
         n = factorial(self.n) / (factorial(k) * factorial(self.n - k))
         return (pow(self.p, k) * pow(1 - self.p, self.n - k)) * n
 
+    def cdf(self, k):
+        """ calculate the cummalitive distribution"""
+        if k < 0:
+            return 0
+        k = int(k)
+        return sum(map(self.pmf, range(k + 1)))
+
 
 def factorial(k):
     """ return factorial"""
