@@ -25,3 +25,22 @@ class Binomial:
             self.p = - (var / mean) + 1
             self.n = round(mean / self.p)
             self.p = mean / self.n
+
+    def pmf(self, k):
+        """ calculates probabilit mass """
+        if k < 0:
+            return 0
+        k = int(k)
+        n = factorial(self.n) / (factorial(k) * factorial(self.n - k))
+        return (pow(self.p, k) * pow(1 - self.p, self.n - k)) * n
+
+
+def factorial(k):
+    """ return factorial"""
+    if k < 0:
+        return None
+    if k == 0:
+        return 1
+    if k == 1:
+        return 1
+    return k * factorial(k - 1)
