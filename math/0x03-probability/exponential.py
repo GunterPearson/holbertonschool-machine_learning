@@ -24,3 +24,10 @@ class Exponential:
         if x < 0:
             return 0
         return self.lambtha * pow(e, -(self.lambtha * x))
+
+    def cdf(self, x):
+        """ find the continous distribution """
+        e = 2.7182818285
+        if x < 0:
+            return 0
+        return 1 - pow(e, -(self.lambtha * x))
