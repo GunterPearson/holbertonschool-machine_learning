@@ -77,7 +77,9 @@ class Neuron:
                 raise ValueError("step must be positive and <= iterations")
         step_array = list(range(0, iterations + 1, step))
         cost_array = []
-        for i in range(1, iterations + 1):
+        for i in range(iterations + 1):
+            if i == iterations + 1:
+                break
             if verbose and i in step_array:
                 cost_array.append(self.cost(Y, self.forward_prop(X)))
                 print("Cost after {} iterations: {}".format(i,
