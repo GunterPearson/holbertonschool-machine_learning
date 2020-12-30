@@ -78,13 +78,12 @@ class Neuron:
         step_array = list(range(0, iterations + 1, step))
         cost_array = []
         for i in range(iterations + 1):
-            if i == iterations + 1:
-                break
             if verbose and i in step_array:
                 cost_array.append(self.cost(Y, self.forward_prop(X)))
                 print("Cost after {} iterations: {}".format(i,
                       self.cost(Y, self.forward_prop(X))))
-            self.gradient_descent(X, Y, self.forward_prop(X), alpha)
+            if i != iterations:
+                self.gradient_descent(X, Y, self.forward_prop(X), alpha)
         if graph:
             bins = range(0, 3001, 500)
             plt.plot(step_array, cost_array, 'b')
