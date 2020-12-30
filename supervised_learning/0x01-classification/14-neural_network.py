@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ neural network class"""
 import numpy as np
-from numpy.lib.function_base import _gradient_dispatcher, gradient
 
 
 class NeuralNetwork:
@@ -78,13 +77,13 @@ class NeuralNetwork:
         dz2 = A2 - Y
         dw2 = np.matmul(dz2, A1.T) / m
         db2 = dz2.mean(axis=1, keepdims=True)
-        dz1 = (self.__W2.T * dz2) * (A1 * (1 - A1))
+        dz1 = np.matmul(self.__W2.T, dz2) * (A1 * (1 - A1))
         dw1 = np.matmul(dz1, X.T) / m
         db1 = dz1.mean(axis=1, keepdims=True)
-        self.__W1 -= (alpha * dw1)
-        self.__b1 -= (alpha * db1)
-        self.__W2 -= (alpha * dw2)
-        self.__b2 -= (alpha * db2)
+        self.__W1 -= alpha * dw1
+        self.__b1 -= alpha * db1
+        self.__W2 -= alpha * dw2
+        self.__b2 -= alpha * db2
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
         """ train model based on gradient descent"""
@@ -96,7 +95,6 @@ class NeuralNetwork:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
-        while iterations > 0:
+        for _ in range(iterations):
             self.gradient_descent(X, Y, *self.forward_prop(X), alpha)
-            iterations -= 1
         return self.evaluate(X, Y)

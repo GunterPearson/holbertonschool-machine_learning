@@ -77,10 +77,10 @@ class NeuralNetwork:
         dz2 = A2 - Y
         dw2 = np.matmul(dz2, A1.T) / m
         db2 = dz2.mean(axis=1, keepdims=True)
-        dz1 = (self.__W2.T * dz2) * (A1 * (1 - A1))
+        dz1 = np.matmul(self.__W2.T, dz2) * (A1 * (1 - A1))
         dw1 = np.matmul(dz1, X.T) / m
         db1 = dz1.mean(axis=1, keepdims=True)
-        self.__W1 -= (alpha * dw1)
-        self.__b1 -= (alpha * db1)
-        self.__W2 -= (alpha * dw2)
-        self.__b2 -= (alpha * db2)
+        self.__W1 -= alpha * dw1
+        self.__b1 -= alpha * db1
+        self.__W2 -= alpha * dw2
+        self.__b2 -= alpha * db2
