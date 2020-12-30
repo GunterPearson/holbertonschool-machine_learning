@@ -96,6 +96,7 @@ class NeuralNetwork:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
-        for i in range(iterations):
+        while iterations > 0:
             self.gradient_descent(X, Y, *self.forward_prop(X), alpha)
+            iterations -= 1
         return self.evaluate(X, Y)
