@@ -85,11 +85,9 @@ class Neuron:
             if i != iterations:
                 self.gradient_descent(X, Y, self.forward_prop(X), alpha)
         if graph:
-            bins = range(0, 3001, 500)
             plt.plot(step_array, cost_array, 'b')
             plt.xlabel('iteration')
             plt.ylabel('cost')
             plt.title("Training Cost")
-            plt.xticks(bins)
             plt.show()
         return self.evaluate(X, Y)
