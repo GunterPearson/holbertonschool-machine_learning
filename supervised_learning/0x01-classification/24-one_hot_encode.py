@@ -5,7 +5,8 @@ import numpy as np
 
 def one_hot_encode(Y, classes):
     """ one hot encode"""
-    if classes <= 0:
+    try:
+        x = np.eye(classes)[Y].T
+        return x
+    except Exception:
         return None
-    x = np.eye(classes)[Y].T
-    return x
