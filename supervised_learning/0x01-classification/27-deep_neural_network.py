@@ -71,8 +71,10 @@ class DeepNeuralNetwork:
     def evaluate(self, X, Y):
         """ evaluate to binary 1 or 0"""
         self.forward_prop(X)
-        return np.round(self.__cache["A" + str(self.__L)]).astype(
-            int), self.cost(Y, self.__cache["A" + str(self.__L)])
+        A = self.cache["A" + str(self.L)]
+        R = np.eye(A.shape[0])[np.argmax(A, axis=0)].T
+        cost = self.cost(Y, A)
+        return R, cost
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """ gradient descent for deepNN"""
