@@ -9,5 +9,5 @@ def forward_prop(x, layer_sizes=[], activations=[]):
     L = x
     for i in range(len(layer_sizes)):
         L = create_layer(L, layer_sizes[i],
-                                    activations[i])
+                         activations[i])
     return L
