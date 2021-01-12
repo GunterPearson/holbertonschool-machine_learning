@@ -12,16 +12,20 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
           activations, alpha, iterations, save_path="/tmp/model.ckpt"):
     """ train model"""
     x, y = create_placeholders(X_train.shape[1], Y_train.shape[1])
+    tf.add_to_collection('x', x)
+    tf.add_to_collection('y', y)
     y_pred = forward_prop(x, layer_sizes, activations)
+    tf.add_to_collection('y_pred', y_pred)
     accuracy = calculate_accuracy(y, y_pred)
+    tf.add_to_collection('accuracy', accuracy)
     loss = calculate_loss(y, y_pred)
+    tf.add_to_collection('loss', loss)
     train_op = create_train_op(loss, alpha)
+    tf.add_to_collection('train_op', train_op)
     init = tf.global_variables_initializer()
-    init_2 = tf.local_variables_initializer()
     saver = tf.train.Saver()
     with tf.Session() as sess:
         sess.run(init)
-        sess.run(init_2)
         for i in range(iterations + 1):
             cost_t = sess.run(loss,
                               feed_dict={x: X_train, y: Y_train})
