@@ -17,9 +17,11 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
     loss = calculate_loss(y, y_pred)
     train_op = create_train_op(loss, alpha)
     init = tf.global_variables_initializer()
+    init_2 = tf.local_variables_initializer()
     saver = tf.train.Saver()
     with tf.Session() as sess:
         sess.run(init)
+        sess.run(init_2)
         for i in range(iterations + 1):
             cost_t = sess.run(loss,
                               feed_dict={x: X_train, y: Y_train})
