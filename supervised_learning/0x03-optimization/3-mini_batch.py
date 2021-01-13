@@ -37,10 +37,10 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
                     x_mini = x_sh[start:end]
                     y_mini = y_sh[start:end]
                     sess.run(train_op, feed_dict={x: x_mini, y: y_mini})
-                    if j % 100 == 0 and j > 0:
+                    if (j + 1) % 100 == 0 and j > 0:
                         cost, acc = sess.run([loss, accuracy],
                                              feed_dict={x: x_mini, y: y_mini})
-                        print("\tStep {}:".format(j))
+                        print("\tStep {}:".format(j + 1))
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
         return saver.save(sess, save_path)
