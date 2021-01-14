@@ -39,14 +39,14 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
         train_op = tf.get_collection('train_op')[0]
         for i in range(epochs + 1):
 
-            train_cost = loss.eval({x: X_train,
-                                    y: Y_train})
-            train_accuracy = accuracy.eval({x: X_train,
-                                            y: Y_train})
-            valid_cost = loss.eval({x: X_valid,
-                                    y: Y_valid})
-            valid_accuracy = accuracy.eval({x: X_valid,
-                                            y: Y_valid})
+            train_cost = sess.run(loss,
+                                  feed_dict={x: X_train, y: Y_train})
+            train_accuracy = sess.run(accuracy,
+                                      feed_dict={x: X_train, y: Y_train})
+            valid_cost = sess.run(loss,
+                                  feed_dict={x: X_valid, y: Y_valid})
+            valid_accuracy = sess.run(accuracy,
+                                      feed_dict={x: X_valid, y: Y_valid})
 
             print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(train_cost))
@@ -66,9 +66,11 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
                 sess.run(train_op, feed_dict={x: shuf_x[start:end],
                                               y: shuf_y[start:end]})
                 if (j + 1) % 100 == 0 and j != 0:
-                    step_cost = sess.run(loss, {x: shuf_x[start:end],
-                                                y: shuf_y[start:end]})
-                    step_accuracy = sess.run(accuracy, {x: shuf_x[start:end],
+                    step_cost = sess.run(loss,
+                                         feed_dict={x: shuf_x[start:end],
+                                                    y: shuf_y[start:end]})
+                    step_accuracy = sess.run(accuracy,
+                                             feed_dict={x: shuf_x[start:end],
                                                         y: shuf_y[start:end]})
                     print("\tStep {}:".format(j + 1))
                     print("\t\tCost: {}".format(step_cost))
