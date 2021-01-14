@@ -56,7 +56,8 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
             if i == epochs:
                 ''' Done training, last epoch metrics printed '''
                 break
-            shuf_x, shuf_y = shuffle_data(X_train, Y_train)
+            else:
+                shuf_x, shuf_y = shuffle_data(X_train, Y_train)
             for j in range(batches):
                 start = batch_size * j
                 end = batch_size * (j + 1)
