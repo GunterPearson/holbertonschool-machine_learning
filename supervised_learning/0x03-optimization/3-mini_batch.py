@@ -59,16 +59,16 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
             shuf_x, shuf_y = shuffle_data(X_train, Y_train)
             for j in range(batches):
                 start = batch_size * j
-                end = start + batch_size
+                end = batch_size * (j + 1)
                 '''if end > m:
                     end = -1'''
                 sess.run(train_op, feed_dict={x: shuf_x[start:end],
                                               y: shuf_y[start:end]})
                 if (j + 1) % 100 == 0 and j != 0:
-                    step_cost = loss.eval({x: shuf_x[start:end],
-                                           y: shuf_y[start:end]})
-                    step_accuracy = accuracy.eval({x: shuf_x[start:end],
-                                                   y: shuf_y[start:end]})
+                    step_cost = sess.run(loss, {x: shuf_x[start:end],
+                                                y: shuf_y[start:end]})
+                    step_accuracy = sess.run(accuracy, {x: shuf_x[start:end],
+                                                        y: shuf_y[start:end]})
                     print("\tStep {}:".format(j + 1))
                     print("\t\tCost: {}".format(step_cost))
                     print("\t\tAccuracy: {}".format(step_accuracy))
