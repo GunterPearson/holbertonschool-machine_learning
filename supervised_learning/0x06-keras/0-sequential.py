@@ -14,8 +14,9 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
                       kernel_regularizer=reg,
                       input_shape=(nx,)))
         else:
-            model.add(keras.layers.Dropout(1 - keep_prob))
             model.add(keras.layers.Dense(layers[x],
                       activation=activations[x],
                       kernel_regularizer=reg))
+        if x < len(layers) - 1:
+            model.add(keras.layers.Dropout(1 - keep_prob))
     return model
