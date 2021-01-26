@@ -4,11 +4,12 @@ import tensorflow.keras as K
 
 
 def train_model(network, data, labels, batch_size,
-                epochs, verbose=True, shuffle=False):
-    """ train model using mini-batch"""
+                epochs, validation_data=None, verbose=True, shuffle=False):
+    """ train model"""
     history = network.fit(data, labels,
                           epochs=epochs,
                           batch_size=batch_size,
                           verbose=verbose,
+                          validation_data=validation_data,
                           shuffle=shuffle)
     return history
