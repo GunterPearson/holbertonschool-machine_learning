@@ -5,4 +5,4 @@ import tensorflow.keras as K
 
 def test_model(network, data, labels, verbose=True):
     """ test model"""
-    return network.evaluate(data, labels)
+    return network.evaluate(data, labels, verbose=verbose)
