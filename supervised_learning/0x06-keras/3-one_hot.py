@@ -6,5 +6,6 @@ import numpy as np
 def one_hot(labels, classes=None):
     """ one hot matrix"""
     m = labels.shape[0]
-    result = np.eye(m)[labels]
-    return result
+    if classes is None:
+        classes = len(np.unique(labels, axis=0))
+    return np.eye(classes)[labels]
