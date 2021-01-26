@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """ keras"""
-from tensorflow import keras
+import tensorflow.keras as K
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
     """ build model"""
-    inputs = keras.Input(shape=(nx,))
-    reg = keras.regularizers.l2(lambtha)
-    new = keras.layers.Dense(layers[0],
+    inputs = K.Input(shape=(nx,))
+    reg = K.regularizers.l2(lambtha)
+    new = K.layers.Dense(layers[0],
                              activation=activations[0],
                              kernel_regularizer=reg)(inputs)
     for x in range(1, len(layers)):
-        new = keras.layers.Dropout(1 - keep_prob)(new)
-        new = keras.layers.Dense(layers[x],
+        new = K.layers.Dropout(1 - keep_prob)(new)
+        new = K.layers.Dense(layers[x],
                                  activation=activations[x],
                                  kernel_regularizer=reg)(new)
-    model = keras.Model(inputs=inputs, outputs=new)
+    model = K.Model(inputs=inputs, outputs=new)
     return model
