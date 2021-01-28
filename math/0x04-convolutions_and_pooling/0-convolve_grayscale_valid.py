@@ -5,10 +5,10 @@ import numpy as np
 
 def convolve_grayscale_valid(images, kernel):
     """ convolve grayscale"""
-    m, h, w = images.shape
+    m, hm, wm = images.shape
     kh, kw = kernel.shape
-    c_h = h - kh + 1
-    c_w = w - kh + 1
+    c_h = hm - kh + 1
+    c_w = wm - kh + 1
     conv = np.zeros((m, c_h, c_h))
     for h in range(c_h):
         for w in range(c_w):
