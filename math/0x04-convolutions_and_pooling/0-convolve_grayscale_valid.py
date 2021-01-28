@@ -7,12 +7,13 @@ def convolve_grayscale_valid(images, kernel):
     """ convolve grayscale"""
     m, h, w = images.shape
     kh, kw = kernel.shape
-    c_h = np.floor(h - kh + 1)
-    c_w = np.floor(w - kw + 1)
-    conv = np.zeros((m, c_h, c_h))
-    for h in range(c_h):
-        for w in range(c_w):
-            square = images[:, h: h + kh, w: w + kw]
-            insert = np.sum(np.sum(square * kernel, axis=1), axis=1)
-            conv[:, h, w] = insert
-    return conv
+    output_h = int(np.floor(h - kh + 1))
+    output_w = int(np.floor(w - kw + 1))
+    output = np.zeros((m, output_h, output_w))
+    for w in range(output_w):
+        for h in range(output_h):
+            output[:, h, w] = np.sum(
+                kernel * images[:, h:h + kh, w:w + kw],
+                axis=(1, 2)
+            )
+    return output
