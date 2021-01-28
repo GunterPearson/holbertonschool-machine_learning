@@ -5,14 +5,17 @@ import numpy as np
 
 def convolve_grayscale_valid(images, kernel):
     """ convolve grayscale"""
-    m, h, w = images.shape
-    kh, kw = kernel.shape
-    c_h = int(np.floor(h - kh + 1))
-    c_w = int(np.floor(w - kw + 1))
-    conv = np.zeros((m, c_h, c_h))
-    for w in range(c_h):
-        for h in range(c_w):
-            square = images[:, h: h + kh, w: w + kw]
-            insert = np.sum(kernel * square, axis=(1, 2))
-            conv[:, h, w] = insert
-    return conv
+    m = images.shape[0]
+    hm = images.shape[1]
+    wm = images.shape[2]
+    hk = kernel.shape[0]
+    wk = kernel.shape[1]
+    ch = hm - hk + 1
+    cw = wm - wk + 1
+    convoluted = np.zeros((m, ch, cw))
+    for h in range(ch):
+        for w in range(cw):
+            matrix = images[:, h: h + hk, w: w + wk]
+            v = np.sum(matrix * kernel, axis=1).sum(axis=1)
+            convoluted[:, h, w] = v
+    return(convoluted)
