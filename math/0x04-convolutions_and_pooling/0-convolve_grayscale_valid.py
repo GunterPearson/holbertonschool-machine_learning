@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ convolutions"""
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def convolve_grayscale_valid(images, kernel):
