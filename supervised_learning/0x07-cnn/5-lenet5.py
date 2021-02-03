@@ -14,9 +14,10 @@ def lenet5(X):
                          activation='relu', input_shape=(X.shape),
                          padding="valid", kernel_initializer="he_normal")(p1)
     p2 = K.layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2))(L2)
+    flat = K.layers.Flatten()(p2)
     L3 = K.layers.Dense(units=120,
                         activation='relu',
-                        kernel_initializer="he_normal")(p2)
+                        kernel_initializer="he_normal")(flat)
     L4 = K.layers.Dense(units=84,
                         activation='relu',
                         kernel_initializer="he_normal")(L3)
