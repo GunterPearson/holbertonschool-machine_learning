@@ -5,7 +5,6 @@ import tensorflow.keras as K
 
 def lenet5(X):
     """ lenet with keras"""
-    model = K.Sequential()
     L1 = K.layers.Conv2D(filters=6, kernel_size=(5, 5),
                          activation='relu', padding="same",
                          kernel_initializer="he_normal",
