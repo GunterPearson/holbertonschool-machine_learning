@@ -7,12 +7,12 @@ def lenet5(X):
     """ lenet with keras"""
     model = K.Sequential()
     L1 = K.layers.Conv2D(filters=6, kernel_size=(5, 5),
-                         activation='relu', input_shape=(X.shape),
-                         padding="same", kernel_initializer="he_normal")(X)
+                         activation='relu', padding="same",
+                         kernel_initializer="he_normal")(X)
     p1 = K.layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2))(L1)
     L2 = K.layers.Conv2D(filters=16, kernel_size=(5, 5),
-                         activation='relu', input_shape=(X.shape),
-                         padding="valid", kernel_initializer="he_normal")(p1)
+                         activation='relu', padding="valid",
+                         kernel_initializer="he_normal")(p1)
     p2 = K.layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2))(L2)
     flat = K.layers.Flatten()(p2)
     L3 = K.layers.Dense(units=120,
