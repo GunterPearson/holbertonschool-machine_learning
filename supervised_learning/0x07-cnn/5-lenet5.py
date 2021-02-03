@@ -21,7 +21,7 @@ def lenet5(X):
     L4 = K.layers.Dense(units=84,
                         activation='relu',
                         kernel_initializer="he_normal")(L3)
-    y_pred = K.layers.Dense(units=84,
+    y_pred = K.layers.Dense(units=10,
                             activation='softmax',
                             kernel_initializer="he_normal")(L4)
     opt = K.optimizers.Adam()
