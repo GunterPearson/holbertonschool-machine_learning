@@ -8,7 +8,8 @@ def lenet5(X):
     model = K.Sequential()
     L1 = K.layers.Conv2D(filters=6, kernel_size=(5, 5),
                          activation='relu', padding="same",
-                         kernel_initializer="he_normal")(X)
+                         kernel_initializer="he_normal",
+                         input_shape=X.shape)(X)
     p1 = K.layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2))(L1)
     L2 = K.layers.Conv2D(filters=16, kernel_size=(5, 5),
                          activation='relu', padding="valid",
