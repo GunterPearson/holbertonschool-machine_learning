@@ -5,17 +5,17 @@ import numpy as np
 
 def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     """ conv forward"""
-    m, h_prev, w_prev, c_prev = A_prev.shape
-    kh, kw, c_prev, c_new = W.shape
+    m, h_prev, w_prev, _ = A_prev.shape
+    kh, kw, _, c_new = W.shape
     sh, sw = stride
     if padding == 'valid':
         ph = 0
         pw = 0
     else:
-        ph = int(((h_prev - 1) * sh + kh - h_prev) / 2) + 1
-        pw = int(((w_prev - 1) * sw + kw - w_prev) / 2) + 1
-    out_h = int((h_prev + 2 * ph - kh) / sh) + 1
-    out_w = int((w_prev + 2 * pw - kw) / sw) + 1
+        ph = ((h_prev * (sh - 1)) - sh + kh) // 2
+        pw = ((w_prev * (sw - 1)) - sw + kw) // 2
+    out_h = int((h_prev - kh + 2 * ph) / sh) + 1
+    out_w = int((w_prev - kh + 2 * pw) / sw) + 1
     padded = np.pad(A_prev, ((0, 0), (ph, ph), (pw, pw), (0, 0)), 'constant')
     conv = np.zeros((m, out_h, out_w, c_new))
     for c in range(c_new):
