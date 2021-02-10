@@ -34,7 +34,7 @@ def resnet50():
     proj3 = projection_block(id9, [512, 512, 2048])
     id10 = identity_block(proj3, [512, 512, 2048])
     id11 = identity_block(id10, [512, 512, 2048])
-    avpool = K.layers.AveragePooling2D(pool_size=(7, 7),
+    avpool = K.layers.AveragePooling2D(pool_size=(1, 1),
                                        strides=1,
                                        padding='valid')(id11)
     dense = K.layers.Dense(1000, activation='softmax')(avpool)
