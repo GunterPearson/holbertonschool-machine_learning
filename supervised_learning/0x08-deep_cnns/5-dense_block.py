@@ -15,7 +15,7 @@ def dense_block(X, nb_filters, growth_rate, layers):
                                padding='same')(act)
         batch1 = K.layers.BatchNormalization(axis=3)(conv)
         act1 = K.layers.Activation('relu')(batch1)
-        conv1 = K.layers.Conv2D(filters=32,
+        conv1 = K.layers.Conv2D(filters=growth_rate,
                                 strides=1,
                                 kernel_size=(3, 3),
                                 kernel_initializer='he_normal',
