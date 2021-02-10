@@ -13,5 +13,5 @@ def transition_layer(X, nb_filters, compression):
                            kernel_initializer='he_normal',
                            padding='same')(act)
     avpool = K.layers.AveragePooling2D(pool_size=(2, 2),
-                                       strides=(1, 1))(conv)
+                                       strides=(2, 2))(conv)
     return avpool, avpool._shape_val[-1]
