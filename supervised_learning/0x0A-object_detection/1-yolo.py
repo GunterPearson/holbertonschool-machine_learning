@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ yolo class"""
+from numpy.core.fromnumeric import resize
 import tensorflow as tf
 import numpy as np
 
@@ -21,12 +22,30 @@ class Yolo():
         return (1 / (1 + np.exp(-x)))
 
     def process_outputs(self, outputs, image_size):
-        """ process outputs"""
+        """process outputs"""
         boxes = []
         box_conf = []
         box_class = []
-        for out in outputs:
-            boxes.append(out[..., 0:4])
-            box_conf.append(self.sigmoid(out[..., 4, np.newaxis]))
-            box_class.append(self.sigmoid(out[..., 5:]))
+        boxes = [output[:, :, :, 0:4] for output in outputs]
+        for oidx, output in enumerate(boxes):
+            for y in range(output.shape[0]):
+                for x in range(output.shape[1]):
+                    c_y = ((self.sigmoid(output[y, x, :, 1]) + y)
+                           / output.shape[0] * image_size[0])
+                    c_x = ((self.sigmoid(output[y, x, :, 0]) + x)
+                           / output.shape[1] * image_size[1])
+                    resize = self.anchors[oidx].astype(float)
+                    resize[:, 0] *= (np.exp(output[y, x, :, 2])
+                                     / 2 * image_size[1] /
+                                     self.model.input.shape[1].value)
+                    resize[:, 1] *= (np.exp(output[y, x, :, 3])
+                                     / 2 * image_size[0] /
+                                     self.model.input.shape[2].value)
+                    output[y, x, :, 0] = c_x - resize[:, 0]
+                    output[y, x, :, 1] = c_y - resize[:, 1]
+                    output[y, x, :, 2] = c_x + resize[:, 0]
+                    output[y, x, :, 3] = c_y + resize[:, 1]
+        for output in outputs:
+            box_conf.append(self.sigmoid(output[..., 4, np.newaxis]))
+            box_class.append(self.sigmoid(output[..., 5:]))
         return boxes, box_conf, box_class
