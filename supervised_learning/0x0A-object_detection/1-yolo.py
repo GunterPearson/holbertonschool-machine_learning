@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ yolo class"""
-from numpy.core.fromnumeric import resize
 import tensorflow as tf
 import numpy as np
 
