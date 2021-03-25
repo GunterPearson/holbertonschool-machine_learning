@@ -7,10 +7,11 @@ class MultiNormal():
     """ mulit normal class"""
     def __init__(self, data):
         """ initializer"""
+        d, n = data.shape
         if not isinstance(data, np.ndarray) or len(data.shape) != 2:
             raise TypeError('data must be a 2D numpy.ndarray')
-        if data.shape[0] < 2:
-            raise ValueError("data must contain multiple data points")
+        if n < 2:
+            raise ValueError('data must contain multiple data points')
         self.mean, self.cov = self.mean_cov(data)
 
     @staticmethod
