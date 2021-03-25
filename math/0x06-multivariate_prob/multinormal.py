@@ -18,5 +18,5 @@ class MultiNormal():
         """ caclulate mean covariance"""
         d, n = X.shape
         m = np.mean(X, axis=1, keepdims=True)
-        cov = np.matmul((X - m), (X - m).T) / (n - 1)
+        cov = np.matmul((X - m), (X.T - m.T)) / (n - 1)
         return m, cov
