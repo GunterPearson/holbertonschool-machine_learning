@@ -37,16 +37,13 @@ def minor(matrix):
     if len(matrix) == 1:
         return [[1]]
 
-    height = len(matrix)
-    width = len(matrix[0])
-
-    mat = []
-    for i in range(height):
-        temp = []
-        for j in range(width):
-            sub = []
-            for row in (matrix[:i] + matrix[i + 1:]):
-                sub.append(row[:j] + row[j + 1:])
-            temp.append(determinant(sub))
-        mat.append(temp)
-    return mat
+    mino = []
+    for x in range(len(matrix)):
+        t = []
+        for y in range(len(matrix[0])):
+            s = []
+            for row in (matrix[:x] + matrix[x + 1:]):
+                s.append(row[:y] + row[y + 1:])
+            t.append(determinant(s))
+        mino.append(t)    
+    return mino

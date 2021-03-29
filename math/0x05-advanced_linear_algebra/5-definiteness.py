@@ -15,7 +15,9 @@ def definiteness(matrix):
     transpose = np.transpose(matrix)
     if not np.array_equal(transpose, matrix):
         return None
+    print(matrix)
     x, y = np.linalg.eig(matrix)
+    print(x)
 
     if all(x > 0):
         return 'Positive definite'

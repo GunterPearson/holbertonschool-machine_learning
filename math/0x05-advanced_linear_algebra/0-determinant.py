@@ -18,24 +18,22 @@ def determinant(matrix):
     for r in matrix:
         if len(r) != len(matrix):
             raise ValueError('matrix must be a square matrix')
-
+    
     if len(matrix) == 1:
         return matrix[0][0]
-
     if len(matrix) == 2:
-        determ = ((matrix[0][0] * matrix[1][1])
-                  - (matrix[0][1] * matrix[1][0]))
-        return determ
+        x = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+        return x
 
-    determ = 0
-    for i, j in enumerate(matrix[0]):
-        row = [r for r in matrix[1:]]
+    det = 0
+    for x, num in enumerate(matrix):
         temp = []
-        for r in row:
-            a = []
-            for c in range(len(matrix)):
-                if c != i:
-                    a.append(r[c])
-            temp.append(a)
-        determ += j * (-1) ** i * determinant(temp)
-    return determ
+        P = matrix[0][x]
+        for row in matrix[1:]:
+            l = []
+            for j in range(len(matrix)):
+                if j != x:
+                    l.append(row[j])
+            temp.append(l)
+        det += P * determinant(temp) * (-1) ** x
+    return det
