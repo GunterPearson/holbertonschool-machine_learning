@@ -28,7 +28,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         results.append((C, clss))
 
         if k == kmin:
-            first_var = variance(X, C)
+            front = variance(X, C)
         var = variance(X, C)
-        L.append(first_var - var)
+        L.append(front - var)
     return results, L
