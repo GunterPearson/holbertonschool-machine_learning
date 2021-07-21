@@ -4,14 +4,16 @@
 
 def minor(matrix):
     """ that calculates the minor of a matrix """
-    if not all(type(row) == list for row in matrix):
-        raise TypeError("matrix must be a list of lists")
-    if len(matrix) == 0 or type(matrix) != list:
-        raise TypeError("matrix must be a list of lists")
-    if not all(len(r) == len(matrix) for r in matrix) or matrix == [[]]:
-        raise ValueError("matrix must be a non-empty square matrix")
-    if len(matrix[0]) == 1:
+    if not isinstance(matrix, list) or matrix == []:
+        raise TypeError('matrix must be a list of lists')
+    if any(not isinstance(row, list) for row in matrix):
+        raise TypeError('matrix must be a list of lists')
+    if any(len(row) != len(matrix) for row in matrix):
+        raise ValueError('matrix must be a non-empty square matrix')
+
+    if len(matrix) == 1:
         return [[1]]
+
     mino = []
     for x in range(len(matrix)):
         t = []
@@ -20,7 +22,7 @@ def minor(matrix):
             for row in (matrix[:x] + matrix[x + 1:]):
                 s.append(row[:y] + row[y + 1:])
             t.append(determinant(s))
-        mino.append(t)
+        mino.append(t)    
     return mino
 
 
