@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ determinant """
-import numpy as np
 
 
 def determinant(matrix):
@@ -13,4 +12,20 @@ def determinant(matrix):
         return 1
     if not all(len(r) == len(matrix) for r in matrix):
         raise ValueError("matrix must be a square matrix")
-    return round(np.linalg.det(matrix))
+    if len(matrix) == 1:
+        return matrix[0][0]
+    if len(matrix) == 2:
+        x = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+        return x
+    det = 0
+    for x, num in enumerate(matrix):
+        temp = []
+        P = matrix[0][x]
+        for row in matrix[1:]:
+            l = []
+            for j in range(len(matrix)):
+                if j != x:
+                    l.append(row[j])
+            temp.append(l)
+        det += P * determinant(temp) * (-1) ** x
+    return det
