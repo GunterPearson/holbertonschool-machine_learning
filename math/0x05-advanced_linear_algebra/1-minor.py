@@ -45,5 +45,5 @@ def minor(matrix):
             for row in (matrix[:x] + matrix[x + 1:]):
                 s.append(row[:y] + row[y + 1:])
             t.append(determinant(s))
-        mino.append(t)    
+        mino.append(t)
     return mino
