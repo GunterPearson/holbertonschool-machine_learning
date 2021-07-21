@@ -33,8 +33,9 @@ def determinant(matrix):
         return x
     det = 0
     for x, num in enumerate(matrix):
+        r = [r for r in matrix[1:]]
         temp = []
-        for row in matrix[1:]:
+        for row in r:
             new = []
             for j in range(len(matrix)):
                 if j != x:
