@@ -8,10 +8,10 @@ def minor(matrix):
         raise TypeError("matrix must be a list of lists")
     if len(matrix) == 0 or type(matrix) != list:
         raise TypeError("matrix must be a list of lists")
-    if len(matrix[0]) == 1:
-        return [[1]]
     if not all(len(r) == len(matrix) for r in matrix) or matrix == [[]]:
         raise ValueError("matrix must be a non-empty square matrix")
+    if len(matrix[0]) == 1:
+        return [[1]]
     mino = []
     for x in range(len(matrix)):
         t = []
@@ -33,9 +33,8 @@ def determinant(matrix):
         return x
     det = 0
     for x, num in enumerate(matrix):
-        r = [r for r in matrix[1:]]
         temp = []
-        for row in r:
+        for row in matrix[1:]:
             new = []
             for j in range(len(matrix)):
                 if j != x:
