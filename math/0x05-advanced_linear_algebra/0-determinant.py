@@ -22,10 +22,10 @@ def determinant(matrix):
         temp = []
         P = matrix[0][x]
         for row in matrix[1:]:
-            l = []
+            new = []
             for j in range(len(matrix)):
                 if j != x:
-                    l.append(row[j])
-            temp.append(l)
+                    new.append(row[j])
+            temp.append(new)
         det += P * determinant(temp) * (-1) ** x
     return det
