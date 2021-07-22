@@ -10,6 +10,9 @@ def definiteness(matrix):
     my_len = matrix.shape[0]
     if len(matrix.shape) != 2 or my_len != matrix.shape[1]:
         return None
+    transpose = np.transpose(matrix)
+    if not np.array_equal(transpose, matrix):
+        return None
     eVals, eVecs = np.linalg.eig(matrix)
     if all(eVals > 0):
         return "Positive definite"
@@ -19,7 +22,5 @@ def definiteness(matrix):
         return "Negative definite"
     if all(eVals <= 0):
         return "Negative semi-definite"
-    if eVals[0] > 0 and eVals[1] < 0 or eVals[1] > 0 and eVals[0] < 0:
-        return "Indefinite"
     else:
-        return None
+        return 'Indefinite'
