@@ -19,5 +19,7 @@ def definiteness(matrix):
         return "Negative definite"
     if all(eVals <= 0):
         return "Negative semi-definite"
-    else:
+    if eVals[0] > 0 and eVals[1] < 0 or eVals[1] > 0 and eVals[0] < 0:
         return "Indefinite"
+    else:
+        return None
