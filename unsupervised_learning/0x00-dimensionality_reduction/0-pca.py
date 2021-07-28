@@ -12,6 +12,5 @@ def pca(X, var=0.95):
     for x in range(d):
         varian = (np.sum(S[:K]) / np.sum(S))
         if varian >= var:
-            print(V[:K].shape)
             return V[:K].T
         K += 1
