@@ -9,5 +9,5 @@ def HP(Di, beta):
     top = np.exp(-Di * beta)
     bottom = np.sum(top)
     pi = top / bottom
-    hi = -1 * np.sum(pi * np.log2(pi))
+    hi = -np.sum(pi * np.log2(pi))
     return hi, pi
