@@ -43,4 +43,4 @@ def kmeans(X, k, iterations=1000):
         # plt.show()
         if np.all(centroids == temp):
             return centroids, classes
-    return None, None
+    return centroids, classes
