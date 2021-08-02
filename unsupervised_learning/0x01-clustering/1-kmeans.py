@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ clustering """
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def kmeans(X, k, iterations=1000):
