@@ -19,7 +19,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     if kmax is not None and kmin >= kmax:
         return None, None
     if kmax is None:
-        kmax = X.shape[1]
+        kmax = X.shape[0]
     k_result = []
     min_var = []
     for i in range(kmin, kmax + 1):
