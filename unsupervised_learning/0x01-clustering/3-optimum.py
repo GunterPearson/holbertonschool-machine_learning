@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ clustering """
 import numpy as np
-import matplotlib.pyplot as plt
 kmeans = __import__('1-kmeans').kmeans
 variance = __import__('2-variance').variance
 
