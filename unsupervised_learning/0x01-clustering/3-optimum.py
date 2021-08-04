@@ -25,7 +25,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     for i in range(kmin, kmax + 1):
         centroids, classes = kmeans(X, i, iterations)
         k_result.append((centroids, classes))
-        if i == 1:
+        if i == kmin:
             min = variance(X, centroids)
         var_at_i = variance(X, centroids)
         min_var.append(min - var_at_i)
