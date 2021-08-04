@@ -16,7 +16,7 @@ def initialize(X, k):
     if type(k) != int or k < 1:
         return None, None, None
     n, d = X.shape
-    pi = [1 / k for i in range(k)]
+    pi = np.ones(k) / k
     cen, classes = kmeans(X, k)
     cov_mat = np.tile(np.identity(d), (k, 1, 1))
     return pi, cen, cov_mat
