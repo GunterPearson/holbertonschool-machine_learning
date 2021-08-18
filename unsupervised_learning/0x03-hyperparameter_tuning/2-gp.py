@@ -5,6 +5,7 @@ import numpy as np
 
 class GaussianProcess():
     """GaussianProcess"""
+
     def __init__(self, X_init, Y_init, l=1, sigma_f=1):
         """represents a noiseless 1D Gaussian process"""
         self.X = X_init
@@ -22,11 +23,9 @@ class GaussianProcess():
 
     def predict(self, X_s):
         """predicts the mean and standard deviation """
-        sigma_y = 1e-8
-        K = self.K + sigma_y**2 * np.eye(len(self.X))
         K1 = self.kernel(self.X, X_s)
-        K2 = self.kernel(X_s, X_s) + 1e-8 * np.eye(len(X_s))
-        K_inv = np.linalg.inv(K)
+        K2 = self.kernel(X_s, X_s)
+        K_inv = np.linalg.inv(self.K)
 
         mu = K1.T.dot(K_inv).dot(self.Y)
         cov = K2 - K1.T.dot(K_inv).dot(K1)
