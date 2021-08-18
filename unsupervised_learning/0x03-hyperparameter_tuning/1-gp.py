@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """hyperparameter tuning"""
-from operator import inv
 import numpy as np
 
 
