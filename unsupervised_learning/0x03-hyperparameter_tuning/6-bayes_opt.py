@@ -2,9 +2,18 @@
 """hyperparameter tuning"""
 import GPy
 import GPyOpt
-
+import numpy as np
 from GPyOpt.methods import BayesianOptimization
 
+
+def f(X, noise=noise):
+    return -np.sin(3*X) - X**2 + 0.7*X + noise * np.random.randn(*X.shape)
+
+
+X_init = np.array([[-0.9], [1.1]])
+Y_init = f(X_init)
+bounds = np.array([[-1.0, 2.0]])
+noise = 0.2
 kernel = GPy.kern.Matern52(input_dim=1, variance=1.0, lengthscale=1.0)
 bds = [{'name': 'X', 'type': 'continuous', 'domain': bounds.ravel()}]
 
