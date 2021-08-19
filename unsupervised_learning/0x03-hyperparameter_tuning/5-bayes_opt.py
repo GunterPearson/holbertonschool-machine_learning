@@ -25,14 +25,10 @@ class BayesianOptimization():
         else:
             Y_sample = np.max(self.gp.Y)
             imp = mu - Y_sample - self.xsi
-        Z = np.zeros(sigma.shape[0])
-        for i in range(sigma.shape[0]):
-            if sigma[i] != 0:
-                Z[i] = imp[i] / sigma[i]
-            else:
-                Z[i] = 0
-        ei = imp * norm.cdf(Z) + sigma * norm.pdf(Z)
-        ei[sigma == 0.0] = 0.0
+        with np.errstate(divide='warn'):
+            Z = imp / sigma
+            ei = imp * norm.cdf(Z) + sigma * norm.pdf(Z)
+            ei[sigma == 0.0] = 0.0
         X_next = self.X_s[np.argmax(ei)]
         return X_next, ei
 
@@ -44,12 +40,13 @@ class BayesianOptimization():
             if x_next in all_next:
                 break
             y_next = self.f(x_next)
-            all_next.append(x_next)
             self.gp.update(x_next, y_next)
+            all_next.append(x_next)
         if self.minimize is True:
             index = np.argmin(self.gp.Y)
         else:
             index = np.argmax(self.gp.Y)
+        self.gp.X = self.gp.X[:-1]
         x_next = self.gp.X[index]
         y_next = self.gp.Y[index]
         return x_next, y_next
