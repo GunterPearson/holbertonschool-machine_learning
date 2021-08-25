@@ -5,18 +5,17 @@ import tensorflow.keras as keras
 
 def autoencoder(input_dims, hidden_layers, latent_dims):
     """creates a variational autoencoder"""
-    class Sampling(keras.layers.Layer):
-        def call(self, inputs):
-            mean, log_var = inputs
-            tf_shape = keras.backend.shape(log_var)
-            norm = keras.backend.random_normal(tf_shape)
-            return norm * keras.backend.exp(log_var / 2) + mean
+    def sampling(inputs):
+        mean, log_var = inputs
+        tf_shape = keras.backend.shape(log_var)
+        norm = keras.backend.random_normal(tf_shape)
+        return norm * keras.backend.exp(log_var / 2) + mean
 
     input = keras.Input(shape=(input_dims,))
     encode = keras.layers.Dense(hidden_layers[0], activation='relu')(input)
     encode_mean = keras.layers.Dense(latent_dims)(encode)
     encode_log = keras.layers.Dense(latent_dims)(encode)
-    encoding = Sampling()([encode_mean, encode_log])
+    encoding = keras.layers.Lambda(sampling)([encode_mean, encode_log])
     encoder = keras.Model(input, [encode_mean, encode_log, encoding])
 
     input2 = keras.Input(shape=(latent_dims,))
