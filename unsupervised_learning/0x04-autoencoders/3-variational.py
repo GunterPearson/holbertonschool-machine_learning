@@ -20,7 +20,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         encode = keras.layers.Dense(dim, activation='relu')(encode)
     encode_mean = keras.layers.Dense(latent_dims)(encode)
     encode_log = keras.layers.Dense(latent_dims)(encode)
-    encoding = z = keras.layers.Lambda(sampling)([encode_mean, encode_log])
+    encoding = keras.layers.Lambda(sampling)([encode_mean, encode_log])
     encoder = keras.Model(input, [encode_mean, encode_log, encoding])
 
     input2 = keras.Input(shape=(latent_dims,))
