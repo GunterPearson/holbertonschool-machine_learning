@@ -1,28 +1,33 @@
 #!/usr/bin/env python3
-"""RNNs"""
+"""RNN module"""
 import numpy as np
 
 
-class RNNCell():
-    """
-    represents a cell of a simple RNN
+class RNNCell:
+    """RNNCell class
     """
     def __init__(self, i, h, o):
-        """ Method to initialize the RNNCell class
-        Args:
-            i - is the dimensionality of the data
-            h - is the dimensionality of the hidden state
-            o - is the dimensionality of the outputs
+        """Initializer
+        Arguments:
+            i {int} -- Is dimensionality of the data
+            h {int} -- Is dimensionality of hidden state
+            o {int} -- Is dimensionality of the outputs
         """
         self.Wh = np.random.randn(i + h, h)
         self.Wy = np.random.randn(h, o)
         self.bh = np.zeros((1, h))
         self.by = np.zeros((1, o))
 
-    def softmax(self, x):
-        """Compute softmax values for each sets of scores in x"""
-        y = np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
-        return y
+    @staticmethod
+    def softmax(z):
+        """Calculates the softmax
+        Arguments:
+            z {np.ndarray} -- Contains array input
+        Returns:
+            np.ndarray -- Softmaxed numpy arrat
+        """
+        ex = np.exp(z)
+        return ex / np.sum(ex, 1, keepdims=True)
 
     def forward(self, h_prev, x_t):
         """Performs forward propagation for one time step
@@ -33,9 +38,7 @@ class RNNCell():
             tuple(np.ndarray) -- Contains the next hidden state, the output of
             the cell
         """
-        one = np.concatenate((h_prev.T, x_t.T), axis=0)
-        two = np.matmul(one.T, self.Wh) + self.bh
-        h_next = np.tanh(two)
-        o = np.matmul(h_next, self.Wy) + self.by
-        y = self.softmax(o)
+        stacked = np.hstack((h_prev, x_t))
+        h_next = np.tanh(stacked @ self.Wh + self.bh)
+        y = self.softmax(h_next @ self.Wy + self.by)
         return h_next, y
