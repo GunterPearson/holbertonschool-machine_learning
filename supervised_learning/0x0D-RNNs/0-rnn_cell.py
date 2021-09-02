@@ -8,8 +8,11 @@ class RNNCell():
     represents a cell of a simple RNN
     """
     def __init__(self, i, h, o):
-        """
-        class constructor
+        """ Method to initialize the RNNCell class
+        Args:
+            i - is the dimensionality of the data
+            h - is the dimensionality of the hidden state
+            o - is the dimensionality of the outputs
         """
         self.Wh = np.random.randn(i + h, h)
         self.Wy = np.random.randn(h, o)
@@ -17,15 +20,18 @@ class RNNCell():
         self.by = np.zeros((1, o))
 
     def softmax(self, x):
-        """
-        return softmax
-        """
+        """Compute softmax values for each sets of scores in x"""
         y = np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
         return y
 
     def forward(self, h_prev, x_t):
-        """
-        feed forward
+        """Performs forward propagation for one time step
+        Arguments:
+            h_prev {np.ndarrat} -- Contains the previous hidden state
+            x_t {np.ndarray} -- Contains the data input of the cell
+        Returns:
+            tuple(np.ndarray) -- Contains the next hidden state, the output of
+            the cell
         """
         one = np.concatenate((h_prev.T, x_t.T), axis=0)
         two = np.matmul(one.T, self.Wh) + self.bh
