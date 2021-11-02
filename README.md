@@ -48,15 +48,13 @@ In this directory we work through Dimensionality Reduction, Clustering, Embeddin
 - [0x04-autoencoders](unsupervised_learning/0x04-autoencoders)
 
 ## [Reinforcement Learning](reinforcement_learning)
-
-
-
-
+In this directory we work through Agent-Environment Framework, Multi-armed Bandit problems, Markov decision process, Exploration vs Exploitation, Policy and Value Functions, Temporal Difference Learning, Deep Reinforcement Learning and others for building Reinforcement Learning Models.
+- [0x00-q_learning](reinforcement_learning/0x00-q_learning)
 
 
 ## Authors
 
 #### Gunter Pearson:
-I am currently studying Machine Learning at Holberton School in Tulsa, Oklahoma and will graduate in January 2022. While working through these projects I have found a passion in problem solving and a need for finding more and more efficient algorithms as I practice and prepare my skills for technical interviews. You can keep up with my progress and find out more about me by clicking on the following links:
+I am currently studying Machine Learning at Holberton School in Tulsa, Oklahoma and will graduate in January 2022. Machine learning has been able to revolutionize so many fields, ranging from medicine to social media, to food, to security. I am excited by the possibilities and my future in Machine Learning. You can keep up with my progress and find out more about me by clicking on the following links:
 - [LinkedIn](www.linkedin.com/in/gunter-pearson-0611b81a1)
 - [Git Hub](https://github.com/GunterPearson)
