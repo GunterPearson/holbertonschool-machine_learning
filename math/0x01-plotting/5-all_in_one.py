@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""plot all 5 previous graphs as one"""
 import numpy as np
 import matplotlib.pyplot as plt
 
