@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" return size in matrix form"""
+"""Write a function that calculates the shape of a matrix"""
 
 
 def matrix_shape(matrix):
