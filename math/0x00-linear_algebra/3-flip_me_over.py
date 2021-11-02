@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-""" transpose matrix """
+""" Transpose a matrix """
 
 
 def matrix_transpose(matrix):
-    """ transpose matrix"""
+    """ Given matrix perform transpose"""
     new = []
     for idx in range(len(matrix[0])):
         mid = []
