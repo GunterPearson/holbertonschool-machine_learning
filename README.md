@@ -20,7 +20,7 @@ In this directory we work through many of the required mathematic skills and con
 - [0x07-bayesian_prob](math/0x07-bayesian_prob)
 
 ## [Supervised Learning](supervised_learning)
-In this directory we work through Binary Classification, Multiclass Classification, Optimization Techniques, Regularization Techniques, Convolutional Neural Networks, Deep Convolutional Architectures for building Supervised Learning Models.
+In this directory we work through Binary Classification, Multiclass Classification, Optimization Techniques, Regularization Techniques, Convolutional Neural Networks, Deep Convolutional Architectures and others for building Supervised Learning Models.
 - [0x01-classification](supervised_learning/0x01-classification)
 - [0x02-tensorflow](supervised_learning/0x02-tensorflow)
 - [0x03-optimization](supervised_learning/0x03-optimization)
@@ -38,6 +38,21 @@ In this directory we work through Binary Classification, Multiclass Classificati
 - [0x11-attention](supervised_learning/0x11-attention)
 - [0x12-transformer_apps](supervised_learning/0x12-transformer_apps)
 - [0x13-qa_bot](supervised_learning/0x13-qa_bot)
+
+## [Unsupervised Learning](unsupervised_learning)
+In this directory we work through Dimensionality Reduction, Clustering, Embeddings, Autoencoders, Generative Adversarial Networks, Hyperparameter Optimization, Hidden Markov Models and others for building Unsupervised Learning Models.
+- [0x00-dimensionality_reduction](unsupervised_learning/0x00-dimensionality_reduction)
+- [0x01-clustering](unsupervised_learning/0x01-clustering)
+- [0x02-hmm](unsupervised_learning/0x02-hmm)
+- [0x03-hyperparameter_tuning](unsupervised_learning/0x03-hyperparameter_tuning)
+- [0x04-autoencoders](unsupervised_learning/0x04-autoencoders)
+
+## [Reinforcement Learning](reinforcement_learning)
+
+
+
+
+
 
 ## Authors
 
