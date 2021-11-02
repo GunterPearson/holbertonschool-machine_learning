@@ -31,6 +31,7 @@ In this directory we work through Binary Classification, Multiclass Classificati
 - [0x08-deep_cnns](supervised_learning/0x08-deep_cnns)
 - [0x09-transfer_learning](supervised_learning/0x09-transfer_learning)
 - [0x0A-object_detection](supervised_learning/0x0A-object_detection)
+**This project uses the Yolo v3 algorithm to perform object location and detection**
 ```
 YOLO Model Summary:
 __________________________________________________________________________________________________
