@@ -1,1 +1,19 @@
-# IN this section we go into supervised learning
+# Supervised Learning
+In this directory we work through Binary Classification, Multiclass Classification, Optimization Techniques, Regularization Techniques, Convolutional Neural Networks, Deep Convolutional Architectures for building Supervised Learning Models.
+- [0x01-classification](0x01-classification)
+- [0x02-tensorflow](0x02-tensorflow)
+- [0x03-optimization](0x03-optimization)
+- [0x04-error_analysis](0x04-error_analysis)
+- [0x05-regularization](0x05-regularization)
+- [0x06-keras](0x06-keras)
+- [0x07-cnn](0x07-cnn)
+- [0x08-deep_cnns](0x08-deep_cnns)
+- [0x09-transfer_learning](0x09-transfer_learning)
+- [0x0A-object_detection](0x0A-object_detection)
+- [0x0D-RNNs](0x0D-RNNs)
+- [0x0F-word_embeddings](0x0F-word_embeddings)
+- [0x10-nlp_metrics](0x10-nlp_metrics)
+- [0x0E-time_series](0x0E-time_series)
+- [0x11-attention](0x11-attention)
+- [0x12-transformer_apps](0x12-transformer_apps)
+- [0x13-qa_bot](0x13-qa_bot)
