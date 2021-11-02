@@ -70,6 +70,8 @@ Anchor boxes: [[[116  90]
   [ 16  30]
   [ 33  23]]]
 ```
+![YOLO object detection dog image](https://github.com/GunterPearson/Images/blob/main/supervised_learning/dog.png?raw=true)
+![YOLO object detection person image](https://github.com/GunterPearson/Images/blob/main/supervised_learning/person.png?raw=true)
 - [0x0D-RNNs](supervised_learning/0x0D-RNNs)
 - [0x0F-word_embeddings](supervised_learning/0x0F-word_embeddings)
 - [0x10-nlp_metrics](supervised_learning/0x10-nlp_metrics)
