@@ -1,4 +1,4 @@
-# holbertonschool-machine_learning
+# Math
 In this directory we work through many of the required mathematic skills and concepts needed for Machine Learning. A thorough mathematical understanding of many of these techniques and concepts is necessary for a good grasp of the inner workings of the algorithms and achieving desired results.
 - [0x00-linear_algebra](0x00-linear_algebra)
 - [0x01-plotting](0x01-plotting)
