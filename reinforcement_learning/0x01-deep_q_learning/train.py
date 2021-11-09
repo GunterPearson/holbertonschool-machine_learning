@@ -1,27 +1,43 @@
 #!/usr/bin/env python3
 """train an agent that can play Atari’s Breakout"""
-import gym
+from PIL import Image
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Convolution2D
-from tensorflow.keras.layers import Activation
-from tensorflow.keras.layers import Input
-from tensorflow.keras.layers import Flatten
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.layers import Dense
-from rl.agents import DQNAgent
-from rl.memory import SequentialMemory
-from rl.callbacks import FileLogger, ModelIntervalCheckpoint
+import gym
+from keras.models import Sequential
+from keras.layers import Dense, Activation, Flatten, Convolution2D, Permute
+from keras.optimizers import Adam
+from rl.agents.dnq import DQNAgent
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
-env = gym.make("Breakout-v0")
-nb_actions = env.action_space.n
-input_shape = env.observation_space.shape
+from rl.memory import SequentialMemory
+from rl.core import Processor
 
 
-def build_model(input_shape, nb_actions):
-    """Build a convolutional network model"""
+class AtariProcessor(Processor):
+    """Atari preprocessor"""
+    def process_observation(self, observation):
+        """process observation"""
+        assert observation.ndim == 3
+        img = Image.fromarray(observation)
+        img = img.resize((84, 84)).convert('L')
+        processed_observation = np.array(img)
+        assert processed_observation.shape == (84, 84)
+        return processed_observation.astype('uint8')
+
+    def process_state_batch(self, batch):
+        """process state batch"""
+        processed_batch = batch.astype('float32') / 255.
+        return processed_batch
+
+    def process_reward(self, reward):
+        """process reward"""
+        return np.clip(reward, -1., 1.)
+
+
+def build_model(num_action):
+    """build model"""
+    input_shape = (4,) + (84, 84)
     model = Sequential()
-    model.add(Input(shape=(3,) + input_shape))
+    model.add(Permute((2, 3, 1), input_shape=input_shape))
     model.add(Convolution2D(32, (8, 8), strides=(4, 4)))
     model.add(Activation('relu'))
     model.add(Convolution2D(64, (4, 4), strides=(2, 2)))
@@ -31,54 +47,35 @@ def build_model(input_shape, nb_actions):
     model.add(Flatten())
     model.add(Dense(512))
     model.add(Activation('relu'))
-    model.add(Dense(nb_actions))
+    model.add(Dense(num_action))
     model.add(Activation('linear'))
-    return model
+    return model(outputs=num_action)
 
 
-model = build_model(input_shape, nb_actions)
+if __name__ == '__main__':
+    env = gym.make("Breakout-v0")
+    env.reset()
+    num_action = env.action_space.n
+    window = 4
+    model = build_model(num_action)
+    model.summary()
+    memory = SequentialMemory(limit=1000000, window_length=4)
+    processor = AtariProcessor()
+    policy = LinearAnnealedPolicy(EpsGreedyQPolicy(), attr='eps',
+                                  value_max=1., value_min=.1, value_test=.05,
+                                  nb_steps=1000000)
 
+    dqn = DQNAgent(model=model, nb_actions=num_action, policy=policy,
+                   memory=memory, processor=processor,
+                   nb_steps_warmup=50000, gamma=.99,
+                   target_model_update=10000,
+                   train_interval=4,
+                   delta_clip=1.)
+    dqn.compile(Adam(lr=.00025), metrics=['mae'])
+    dqn.fit(env,
+            nb_steps=17500,
+            log_interval=10000,
+            visualize=False,
+            verbose=2)
 
-def build_agent(model, nb_actions):
-    """Builds agent"""
-    policy = LinearAnnealedPolicy(
-        EpsGreedyQPolicy(),
-        attr='eps',
-        value_max=1,
-        value_min=.1,
-        value_test=.2,
-        nb_steps=10000000
-    )
-    memory = SequentialMemory(
-        limit=10000000,
-        window_length=3
-    )
-    dqn = DQNAgent(
-        model=model,
-        memory=memory,
-        policy=policy,
-        enable_dueling_network=True,
-        dueling_type='avg',
-        nb_actions=nb_actions,
-        nb_steps_warmup=50000
-    )
-    dqn.compile(Adam(learning_rate=1e-4), metrics=['mae'])
-    return dqn
-
-
-dqn = build_agent(model, nb_actions)
-
-
-def train_agent(dqn, env, weights_filename):
-    """Trains agent"""
-    dqn.fit(
-        env,
-        nb_steps=17500,
-        log_interval=1000,
-        visualize=False,
-        verbose=2
-    )
-    dqn.save_weights(
-        'policy.h5',
-        overwrite=True
-    )
+    dqn.save_weights('policy.h5', overwrite=True)
