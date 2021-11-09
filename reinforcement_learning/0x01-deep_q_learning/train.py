@@ -71,22 +71,14 @@ dqn = build_agent(model, nb_actions)
 
 def train_agent(dqn, env, weights_filename):
     """Trains agent"""
-    checkpoint_weights_filename = 'dqn_Breakout-v0' + '_weights_{step}.h5f'
-    log_filename = 'dqn_{}_log.json'.format("Breakout-v0")
-    callbacks = [
-        ModelIntervalCheckpoint(
-            checkpoint_weights_filename,
-            interval=250000
-        )
-    ]
-    callbacks += [FileLogger(log_filename, interval=1000)]
     dqn.fit(
         env,
-        callbacks=callbacks,
-        nb_steps=10000000,
-        log_interval=1000
+        nb_steps=17500,
+        log_interval=1000,
+        visualize=False,
+        verbose=2
     )
     dqn.save_weights(
-        weights_filename,
+        'policy.h5',
         overwrite=True
     )
