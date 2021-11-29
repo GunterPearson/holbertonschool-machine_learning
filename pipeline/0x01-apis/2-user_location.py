@@ -16,6 +16,7 @@ if __name__ == '__main__':
         string = 'X-Ratelimit-Reset'
         date = datetime.fromtimestamp(int(response.headers[string]))
         min = str((date - datetime.now())).split(':')[1]
+        min = int(min)
         print("Reset in {} minutes".format(min))
     else:
         print(response.json()["location"])
