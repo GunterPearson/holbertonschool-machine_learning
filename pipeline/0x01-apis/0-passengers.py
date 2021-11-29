@@ -12,7 +12,8 @@ def availableShips(passengerCount):
         for ship in r.json()["results"]:
             if ship["passengers"] is not None:
                 try:
-                    if int(ship["passengers"]) >= passengerCount:
+                    num = ship["passengers"].replace(",", "")
+                    if int(num) >= passengerCount:
                         ship_list.append(ship["name"])
                 except ValueError:
                     pass
