@@ -13,7 +13,8 @@ if __name__ == '__main__':
     if response.status_code == 404:
         print("Not found")
     elif response.status_code == 403:
-        date = datetime.fromtimestamp(int(response.headers['X-Ratelimit-Reset']))
+        string = 'X-Ratelimit-Reset'
+        date = datetime.fromtimestamp(int(response.headers[string]))
         min = str((date - datetime.now())).split(':')[1]
         print("Reset in {} minutes".format(min))
     else:
