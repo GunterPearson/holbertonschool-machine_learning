@@ -10,11 +10,10 @@ def sentientPlanets():
     world_list = []
     while r.status_code == 200:
         for species in r.json()["results"]:
-            if species["designation"] == "sentient":
-                url = species["homeworld"]
-                if url is not None:
-                    ur = requests.get(url)
-                    world_list.append(ur.json()["name"])
+            url = species["homeworld"]
+            if url is not None:
+                ur = requests.get(url)
+                world_list.append(ur.json()["name"])
         try:
             r = requests.get(r.json()["next"])
         except Exception:
