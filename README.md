@@ -1,5 +1,5 @@
 # holbertonschool-machine_learning
-This repository contains projects for the Machine Learning scpecialization at Holberton School. Holberton School's Machine Learning scpecialization teaches the fundamentals of an emerging and exciting field of study that has implications in almost every industry. The projects included in this repository are mathematical concepts needed for Machine Learning, Supervised Learning, Unsupervised Learning, and Reinforement Learning. Below you will see all four directories and the projects within, I have highlighted important projects inside each directory that you can click on to find out more.
+This repository contains projects for the Machine Learning specialization at Holberton School. Holberton School’s Machine Learning specialization teaches the fundamentals of an emerging and exciting field of study that have implications in almost every industry. The projects included in this repository are mathematical concepts needed for Machine Learning, Supervised Learning, Unsupervised Learning, and Reinforcement Learning. Below, you will see all four directories and the projects within. I have highlighted important projects inside each directory that you can click on to find out more.
 
 ## Python Libraries
 - Tensorflow
