@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ create place holders """
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 def create_placeholders(nx, classes):
