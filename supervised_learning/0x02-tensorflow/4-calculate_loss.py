@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ calcualte loss"""
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 
 
 def calculate_loss(y, y_pred):

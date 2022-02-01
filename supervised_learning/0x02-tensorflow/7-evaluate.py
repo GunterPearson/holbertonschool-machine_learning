@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ train"""
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 
 
 def evaluate(X, Y, save_path):
